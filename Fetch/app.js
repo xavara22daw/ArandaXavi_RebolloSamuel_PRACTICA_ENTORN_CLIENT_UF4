@@ -21,15 +21,22 @@ async function cridaRemota(url = '', cos = {}) {
   
   let personatgeEntrada = document.getElementById("entrada").value;
 
-  document.getElementById("entrada").onkeyup = function() {
+  document.getElementById("entrada").onchange = function() {
     cridaRemota(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${this.value}&ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939` )
     .then(dades => {
   
       console.table(dades); 
-      document.getElementById("sortida").innerHTML = dades.data.results[0].name;
+      document.getElementById("nom").innerHTML = dades.data.results[0].name;
 
-      
-    });
+      let idCharacter = dades.data.results[0].id;
+
+      cridaRemota(`https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939`)
+    .then(dades => {
+      console.log(dades.data.results[0].title);
+      document.getElementById("titulo").innerHTML = dades.data.results[0].title;
+
+    })});
+
   };
 
   
