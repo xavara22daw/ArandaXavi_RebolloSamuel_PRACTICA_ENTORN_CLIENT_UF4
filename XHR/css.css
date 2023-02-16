@@ -1,0 +1,22 @@
+.contenedorComics{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+}
+
+.contenedorComics img{
+    width: 35%;
+    height: auto;
+}
+
+.contenedorComics h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
+}
+
+#resultados{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
