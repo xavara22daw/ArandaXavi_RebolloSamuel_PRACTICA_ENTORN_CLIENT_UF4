@@ -30,9 +30,9 @@ document.getElementById("entrada").onchange = function () {
       console.table(dades);
       for (let i = 0; i < dades.data.results.length; i++) {
         const personaje = dades.data.results[i].name;
-        const nuevoDiv = document.createElement("div");
+        /*const nuevoDiv = document.createElement("div");
         nuevoDiv.textContent = personaje;
-        contenedorPersonajes.appendChild(nuevoDiv);
+        contenedorPersonajes.appendChild(nuevoDiv);*/
       }
       //document.getElementById("nom").innerHTML = dades.data.results[0].name;
 
@@ -41,7 +41,8 @@ document.getElementById("entrada").onchange = function () {
       cridaRemota(`https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939&limit=70`)
         .then(dades => {
           contenedorComics.innerHTML = "";
-          console.log(dades.data.results[0]);
+          console.log(dades);
+          /*console.log(dades.data.results[0]);*/
 
           /*const descripcion = comic.description;
           const creators = comic.creators.items;
@@ -64,10 +65,7 @@ document.getElementById("entrada").onchange = function () {
             const nuevoDiv = document.createElement("div");
             contenedorComics.appendChild(nuevoDiv);
             nuevoDiv.classList.add("contenedorComics");
-            nuevoDiv.innerHTML = `
-            <img src="${thumbnail}"><br>
-            <h1>${titulo}</h1><br>
-            `;
+            nuevoDiv.innerHTML = /*`<img src="${thumbnail}"><br><h1>${titulo}</h1><br>`;*/ `<img src="${thumbnail}"><br>`;
           }
         })
     });

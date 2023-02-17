@@ -1,21 +1,30 @@
 <head>
 	<meta charset="utf-8" />
-	<title>DAW2</title>
-	<link rel="stylesheet" href="css.css">
-	<script type="text/javascript" src="app.js" defer>
-	</script>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+	<title>Api MARVEL</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript" src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<h1>API MARVEL</h1>
-	<input type="text" id="entrada"><br>
-	<label id="nom"></label><br><label id="titulo"></label>
+
+    <!-- Menú con el logo y el buscador -->
+	<nav>
+        <a class="logo">
+            <img src="Marvel.png">
+        </a>
+        <ul>
+            <input type="text" id="entrada" placeholder="Busca por personaje"><br>
+        </ul>
+    </nav>
+    <label id="nom"></label><br><label id="titulo"></label>
 	<div id="personajes"></div>
 	<br><br><br>
 	<div id="resultados"></div>
+
+    <!-- Parte de la derecha donde se muestra la información del cómic que se selecciona -->
+    <div class="informacionComics">
+	</div>
 </body>
 
 </html>
