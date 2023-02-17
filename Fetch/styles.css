@@ -20,7 +20,7 @@ nav img {
 /* Estilos para el buscador que buscará los cómics */
 nav ul {
     float: right;
-    margin-right: 8%;
+    margin-right: 9%;
 }
 
 nav ul input {
@@ -42,18 +42,15 @@ nav ul input {
 }
 
 .contenedorComics{
-    
     flex-direction: row;
     width: 17%;
-    margin: 1%;
-    
-    
+    position: relative;
+    margin-top: 1.5%;
 }
 
 .contenedorComics img{
     width: 100%;
     height: 100%;
-    
 }
 
 .contenedorComics h1{
@@ -68,4 +65,34 @@ nav ul input {
     flex-wrap: wrap;
     width: 70%;
     margin-left: 3%;
+}
+
+.overlayComics {
+    position: absolute;
+    /* Situo justo el overlay en la posición 0-0 del div */
+    top: 0;
+    left: 0;
+    background-color: #EE171F;
+    width: 100%;
+    /* Le doy al height el valor de 0 ya que no quiero mostrarlo si no estoy en hover */
+    height: 0;
+    transition: .5s;
+    /* Para esconder el contenido y que no se vea */
+    overflow: hidden;
+}
+
+/* Hover para activar el overlay de la imagen */
+.contenedorComics:hover .overlayComics {
+    cursor: pointer;
+    height: 100%;
+}
+
+.overlayComics h2 {
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    /* Para colocar exactamente en el centro el texto del overlay */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

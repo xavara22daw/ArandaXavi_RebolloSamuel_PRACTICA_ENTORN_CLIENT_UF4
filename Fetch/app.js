@@ -65,7 +65,11 @@ document.getElementById("entrada").onchange = function () {
             const nuevoDiv = document.createElement("div");
             contenedorComics.appendChild(nuevoDiv);
             nuevoDiv.classList.add("contenedorComics");
-            nuevoDiv.innerHTML = /*`<img src="${thumbnail}"><br><h1>${titulo}</h1><br>`;*/ `<img src="${thumbnail}"><br>`;
+            const divOverlay = document.createElement("div");
+            nuevoDiv.innerHTML = /*`<img src="${thumbnail}"><br><h1>${titulo}</h1><br>`;*/ `<img src="${thumbnail}">`;
+            nuevoDiv.appendChild(divOverlay);
+            divOverlay.classList.add('overlayComics');
+            divOverlay.innerHTML = `<h2>${titulo}</h2>`;
           }
         })
     });
