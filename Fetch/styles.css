@@ -1,64 +1,61 @@
+/* Estilos generales en toda la página */
 * {
     margin: 0;
     padding: 0;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-/* Dimensiones para el menú de navegación */
+/* Imagen de fondo de la página */
+body {
+    background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8)),url("../public/avengers.jpg");
+    background-size: cover;
+    position: relative;
+}
+
+/* Estilos para el menú con el logo y el buscador */
 nav {
-    background: #EE171F;
+    background-color: #EE171F;
     height: 100px;
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-/* Dimensiones y características del logo de Marvel */
-nav img {
-    margin: 0.5% 1% 0.5% 5%;
-    width: 10%;
-}
+    /* Estilos para el div que contiene el logo de Marvel y para el propio logo */
+    nav div {
+        margin-left: 5%;
+        margin-right: auto;
+    }
 
-/* Estilos para el buscador que buscará los cómics */
-nav ul {
-    float: right;
-    margin-right: 9%;
-}
+    nav div img {
+        width: 160px;
+    }
 
-nav ul input {
-    display: inline-block;
-    padding: 4%;
-    border-radius: 5px;
-    margin-top: 19%;
-}
+    /* Estilos para el buscador que buscará los cómics */
+    nav ul {
+        margin-right: 9%;
+    }
 
-.informacionComics {
+    nav ul input {
+        display: inline-block;
+        padding: 6%;
+        border-radius: 7px;
+        margin-top: 2%;
+        font-size: 14px;
+    }
+
+/* Barra lateral de la derecha que muestra la información de los cómics */
+.infoComics {
     width: 30%;
     height: 100vh;
-    background-color: #870F0F;
-    position:fixed;
     position:fixed;
     left:75%;
     top:0;
     z-index: -1;
 }
 
-.contenedorComics{
-    flex-direction: row;
-    width: 17%;
-    position: relative;
-    margin-top: 1.5%;
-}
-
-.contenedorComics img{
-    width: 100%;
-    height: 100%;
-}
-
-.contenedorComics h1{
-    font-weight: bold;
-    font-size: 13px;
-    
-}
-
+/* Estilos para el contenedor que contiene los resultados obtenidos de cómics */
 #resultados{
     display: flex;
     justify-content: space-around;
@@ -67,6 +64,21 @@ nav ul input {
     margin-left: 3%;
 }
 
+/* Estilos para los contenedores DIV que tienen las portadas de los cómics */
+.contenedorComics{
+    flex-direction: row;
+    width: 14%;
+    position: relative;
+    margin-top: 1.5%;
+    margin: 1%;
+}
+
+.contenedorComics img{
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para el overlay que se realiza cuando pasas el ratón sobre una portada de un cómic */
 .overlayComics {
     position: absolute;
     /* Situo justo el overlay en la posición 0-0 del div */
@@ -88,7 +100,7 @@ nav ul input {
 }
 
 .overlayComics h2 {
-    font-size: 20px;
+    font-size: 1vw;
     color: white;
     position: absolute;
     /* Para colocar exactamente en el centro el texto del overlay */
@@ -96,3 +108,25 @@ nav ul input {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* Estilos para el div que contiene la información detallada del cómic seleccionado */
+.comicData {
+    width: 75%;
+    height: 100%;
+    margin: 21% 5% 20% 5%;
+}
+
+    .comicData h3 {
+        text-align: left;
+        color: white;
+        font-size: 1.3vw;
+        text-align: center;
+        margin-bottom: 4%;
+    }
+
+    .comicData img {
+        width: 70%;
+        display: block;
+        margin: auto;
+        transition: 0.5s;
+    }
