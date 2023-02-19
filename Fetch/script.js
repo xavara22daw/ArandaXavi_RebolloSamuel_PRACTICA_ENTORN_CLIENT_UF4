@@ -1,7 +1,6 @@
 // Creamos 1 variable las cual igualamos a 1 elemento del DOM
 let contenedorComics = document.getElementById("resultados");
 
-
 // Declaramos la función asíncrona que realizará las peticiones
 async function cridaRemota(url = '') {
   // Realizamos el fetch() dentro de la función asíncrona "crida remota"
@@ -43,7 +42,7 @@ document.getElementById("entrada").onchange = function () {
                 contenedorComics.innerHTML = `<h1 style="margin-top: 21%; color: white;">La búsqueda no ha obtenido resultados.</h1>`;
             }else {
                 // Si hemos obtenido resultados en la búsqueda del personaje, seguimos con el proceso
-                contenedorComics.innerHTML = `<img src="../public/thor.gif" style="margin-top: 19%; transform: scale(1.4);">`;
+                contenedorComics.innerHTML = `<img src="../public/Doctor-Strange.gif" style="margin-top: 12%; transform: scale(0.6);">`;
                 // Hacemos otra llamada a la función "cridaRemota" para encontrar los cómics del personaje
                 cridaRemota(`https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939&limit=84`)
                 .then(response => {
@@ -79,33 +78,51 @@ document.getElementById("entrada").onchange = function () {
                             }
                             let tituloInfo = document.createElement('h3');
                             let portadaInfo = document.createElement('img');
+                            let divPortadaInfo = document.createElement('div');
+                            divPortadaInfo.classList.add('divPortadaInfo');
                             let descripcionInfo = document.createElement('p');
-                            let autorInfo = document.create
+                            let autorInfo = document.createElement('p');
+                            let dibujanteInfo = document.createElement('p');
+                            let precioInfo = document.createElement('p');
                             // Asignamos valor a cada uno de los elementos que vamos a 'comicData'
                             tituloInfo.innerHTML = `${titulo}`;
                             portadaInfo.src = portada;
-                            descripcionInfo.innerHTML = `<b>Descripción: </b>${resultado.description}`;
-                            comicData.append(tituloInfo, portadaInfo, descripcionInfo);
+                            if (resultado.description != null && resultado.description != ""){
+                                descripcionInfo.innerHTML = `<b>Descripción: </b>${resultado.description}`;
+                            }
+                            // Variable para acceder fácilmente a los creadores
+                            let creadores = resultado.creators.items;
+                            // Trabajamos para guardar el valor del autor y el dibujante de cada cómic
+                            let autor;
+                            let dibujante;
+                            for (let i = 0; i < creadores.length; i++){
+                                if (creadores[i].role == "writer"){
+                                    autor = creadores[i].name;
+                                }else if (creadores[i].role == "penciler" || creadores[i].role == "penciller" || creadores[i].role == "penciller (cover)" || creadores[i].role == "penciler (cover)") {
+                                    dibujante = creadores[i].name;
+                                }
+                            }
 
-                            /*for (let i = 0; i < dades.data.results.length; i++) {
-                                const comic = dades.data.results[i];
-                                const titulo = comic.title;
-                    
-                                const thumbnail = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
-                    
-                                const nuevoDiv = document.createElement("div");
-                                contenedorComics.appendChild(nuevoDiv);
-                                nuevoDiv.classList.add("contenedorComics");
-                                const divOverlay = document.createElement("div");
-                                nuevoDiv.innerHTML = /*`<img src="${thumbnail}"><br><h1>${titulo}</h1><br>`; `<img src="${thumbnail}">`;
-                                nuevoDiv.appendChild(divOverlay);
-                                divOverlay.classList.add('overlayComics');
-                                divOverlay.innerHTML = `<h2>${titulo}</h2>`;
-                              }*/
+                            // Añadimos la información del cómic seleccionado al DOM para que se vea en la página
+                            comicData.appendChild(tituloInfo);
+                            comicData.appendChild(divPortadaInfo);
+                            divPortadaInfo.appendChild(portadaInfo);
+                            comicData.appendChild(descripcionInfo);
+                            if (autor != undefined){
+                                autorInfo.innerHTML = `<b>Autor:</b> ${autor}`;
+                                comicData.appendChild(autorInfo);
+                            }
+                            if (dibujante != undefined){
+                                dibujanteInfo.innerHTML = `<b>Dibujante:</b> ${dibujante}`;
+                                comicData.appendChild(dibujanteInfo); 
+                            }
+                            if (resultado.prices[0].price != 0 && resultado.prices[0].price != ""){
+                                precioInfo.innerHTML = `<b>Precio:</b> ${resultado.prices[0].price}`;
+                                comicData.appendChild(precioInfo);
+                            }
                         }
                     });
                 })
             } 
         });
 };
-

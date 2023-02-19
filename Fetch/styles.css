@@ -16,7 +16,7 @@ body {
 nav {
     background-color: #EE171F;
     height: 100px;
-    width: 100%;
+    width: 75%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -34,7 +34,7 @@ nav {
 
     /* Estilos para el buscador que buscará los cómics */
     nav ul {
-        margin-right: 9%;
+        margin-right: 2%;
     }
 
     nav ul input {
@@ -47,6 +47,7 @@ nav {
 
 /* Barra lateral de la derecha que muestra la información de los cómics */
 .infoComics {
+    background: #EE171F; /*linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8))*/
     width: 30%;
     height: 100vh;
     position:fixed;
@@ -113,7 +114,7 @@ nav {
 .comicData {
     width: 75%;
     height: 100%;
-    margin: 21% 5% 20% 5%;
+    margin: 17% 5% 20% 5%;
 }
 
     .comicData h3 {
@@ -124,9 +125,22 @@ nav {
         margin-bottom: 4%;
     }
 
-    .comicData img {
-        width: 70%;
-        display: block;
+    .divPortadaInfo {
         margin: auto;
-        transition: 0.5s;
+        width: 70%;
+        height: 45%;
+        margin-bottom: 4%;
+        position: relative;
+    }
+
+    .divPortadaInfo img {
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .comicData p {
+        color: white;
+        font-size: 14px;
+        margin-bottom: 4%;
     }
