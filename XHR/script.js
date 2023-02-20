@@ -1,40 +1,57 @@
 /* 
-    * FETCH
+    * XHR
     * Es demana realitzar una aplicació que permet obtenir informació de l’API de Marvel, https://developer.marvel.com/.
     * @authors 15585039.clot@fje.edu (Samuel Rebollo) | 15585072.clot@fje.edu (Xavier Aranda) 
-    * @version 1.0 31.01.23 (data començament)
+    * @version 1.0 09.02.23 (data començament)
 */
 
-// Creamos 1 variable las cual igualamos a 1 elemento del DOM
+// Creamos 2 variables las cuales igualamos a 2 elementos del DOM
 let contenedorComics = document.getElementById("resultados");
+let contenedorLogo = document.getElementById("contenedorLogo");
 
-// Declaramos la función asíncrona que realizará las peticiones
-async function cridaRemota(url = '') {
-  // Realizamos el fetch() dentro de la función asíncrona "crida remota"
-  const response = await fetch(url, {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'default',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    redirect: 'follow', 
-    referrerPolicy: 'no-referrer', // Como estamos haciendo un GET, lo desactivamos
-  });
+// Creamos un función llamada "carregarLogo", la cual hace una petición para cargar la imagen del logo de la web
+function carregarLogo(){
+    let xhr = new XMLHttpRequest();
+    // Hacemos la petición para bajarnos la imagen del logo de Marvel y situarla como logo (trabajamos con datos binarios)
+    xhr.open('GET', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/2560px-Marvel_Logo.svg.png', true);
+    xhr.responseType = 'blob';
 
-  return response.json(); // passa de JSON a objecte JS
+    xhr.onload = function(e) {
+        if (this.status == 200) {
+            let blob = this.response;
+            let img = document.createElement('img');
+            let URL = window.URL || window.webkitURL;
+            img.src = URL.createObjectURL(blob);
+            contenedorLogo.appendChild(img);
+        };
+    };
+    xhr.send(null);
 }
 
-// Cada vez que hay un evento change en el elemento del DOM 'entrada', llamamos a la función asíncrona cridaRemota
-document.getElementById("entrada").onchange = function () {
-    // Declaramos la variable 'idUndefined' para controlar si la búsqueda da resultados o no
-    let idUndefined = false;
-    let idCharacter;
-    contenedorComics.innerHTML = '';
+// Definimos la función "cridaRemota" con la que haremos la peticiones
+function cridaRemota(url, metodo, callback) {
+    let xhr = new XMLHttpRequest(); 
+    xhr.open(metodo, url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            let dades = JSON.parse(xhr.responseText);
+            callback(dades);
+        }
+    };
+    xhr.send(null);
+}
 
-    cridaRemota(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${this.value}&ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939`)
-        .then(dades => {
+// Creamos la función inici que se iniciará cuando todo haya cargado
+function inici(){
+    // Llamamos a la función "carregarLogo" para que se cargue el logo de Marvel nada más iniciar la web
+    carregarLogo();
+    // Cada vez que hay un evento change en el elemento del DOM 'entrada', realizamos la peticion para obtener los cómics del personaje
+    document.getElementById("entrada").onchange = function () {
+        let idUndefined = false;
+        let idCharacter;
+        contenedorComics.innerHTML = '';
+        // Llamamos a la función para encontrar el ID del personaje que hemos indicado en el buscador
+        cridaRemota(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${this.value}&ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939`, 'GET', function(dades){
             console.table(dades.data.results);
             // Asignamos a la variable 'idCharacter' el valor del id el primer personaje encontrado en la búsqueda
             if (dades.data.results[0] == undefined){
@@ -42,7 +59,7 @@ document.getElementById("entrada").onchange = function () {
             }else {
                 idCharacter = dades.data.results[0].id;
             }
-            
+
             // Comprobamos si hemos obtenido resultados en la búsqueda del personaje o no
             if (idUndefined == true){
                 console.log("La búsqueda no ha obtenido resultados.");
@@ -50,14 +67,13 @@ document.getElementById("entrada").onchange = function () {
             }else {
                 // Si hemos obtenido resultados en la búsqueda del personaje, seguimos con el proceso
                 contenedorComics.innerHTML = `<img src="../public/Doctor-Strange.gif" style="margin-top: 12%; transform: scale(0.6);">`;
-                // Hacemos otra llamada a la función "cridaRemota" para encontrar los cómics del personaje
-                cridaRemota(`https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939&limit=84`)
-                .then(response => {
+                // Hacemos otra llamada a la función "cridaRemota" para encontrar los cómics del personaje que hemos buscado
+                cridaRemota(`https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939&limit=84`, 'GET', function(response){
                     contenedorComics.innerHTML = "";
                     console.log("Cómics encontrados del personaje: ");
                     console.log(response.data.results);
                     responseComics = response.data.results;
-                    
+
                     // Recorremos la variable responseComics con un forEach. Esta variable tiene los resultados obtenidos
                     responseComics.forEach(resultado => {
                         let titulo = resultado.title;
@@ -74,7 +90,7 @@ document.getElementById("entrada").onchange = function () {
                         divOverlay.classList.add('overlayComics');
                         divOverlay.innerHTML = `<h2>${titulo}</h2>`;
                         divOverlay.setAttribute("id", "informacioComic");
-                        
+
                         // Cada vez que hagamos click en la portada de un cómic, mostraremos en la derecha la información de ese cómic
                         divOverlay.onclick = function (){
                             // Definimos variables con valores de elementos del DOM ya existentes o que serán añadidos posteriormente
@@ -128,8 +144,11 @@ document.getElementById("entrada").onchange = function () {
                                 comicData.appendChild(precioInfo);
                             }
                         }
-                    });
+                    })
                 })
-            } 
-        });
-};
+            }
+        })
+    }
+}
+
+window.addEventListener("load", inici, true);
