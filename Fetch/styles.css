@@ -144,3 +144,14 @@ nav {
         font-size: 14px;
         margin-bottom: 4%;
     }
+    
+/* Media query para ajustar el tamaño en pantallas */
+@media (max-width: 1024px){
+    .divPortadaInfo {
+        margin: auto;
+        width: 55%;
+        height: 35%;
+        margin-bottom: 4%;
+        position: relative;
+    }
+}
