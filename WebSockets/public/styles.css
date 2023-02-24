@@ -1,0 +1,146 @@
+/* Estilos generales en toda la página */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Imagen de fondo de la página */
+body {
+    background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8)),url("avengers.jpg");
+    background-size: cover;
+    position: relative;
+}
+
+/* Estilos para el menú con el logo y el buscador */
+nav {
+    background-color: #EE171F;
+    height: 100px;
+    width: 75%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+    /* Estilos para el div que contiene el logo de Marvel y para el propio logo */
+    nav div {
+        margin-left: 5%;
+        margin-right: auto;
+    }
+
+    nav div img {
+        width: 160px;
+    }
+
+    /* Estilos para el buscador que buscará los cómics */
+    nav ul {
+        margin-right: 2%;
+    }
+
+    nav ul input {
+        display: inline-block;
+        padding: 6%;
+        border-radius: 7px;
+        margin-top: 2%;
+        font-size: 14px;
+    }
+
+/* Barra lateral de la derecha que muestra la información de los cómics */
+.infoComics {
+    background: #EE171F; /*linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8))*/
+    width: 30%;
+    height: 100vh;
+    position:fixed;
+    left:75%;
+    top:0;
+    z-index: -1;
+}
+
+/* Estilos para el contenedor que contiene los resultados obtenidos de cómics */
+#resultados{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 70%;
+    margin-left: 3%;
+}
+
+/* Estilos para los contenedores DIV que tienen las portadas de los cómics */
+.contenedorComics{
+    flex-direction: row;
+    width: 14%;
+    position: relative;
+    margin-top: 1.5%;
+    margin: 1%;
+}
+
+.contenedorComics img{
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para el overlay que se realiza cuando pasas el ratón sobre una portada de un cómic */
+.overlayComics {
+    position: absolute;
+    /* Situo justo el overlay en la posición 0-0 del div */
+    top: 0;
+    left: 0;
+    background-color: #EE171F;
+    width: 100%;
+    /* Le doy al height el valor de 0 ya que no quiero mostrarlo si no estoy en hover */
+    height: 0;
+    transition: .5s;
+    /* Para esconder el contenido y que no se vea */
+    overflow: hidden;
+}
+
+/* Hover para activar el overlay de la imagen */
+.contenedorComics:hover .overlayComics {
+    cursor: pointer;
+    height: 100%;
+}
+
+.overlayComics h2 {
+    font-size: 1vw;
+    color: white;
+    position: absolute;
+    /* Para colocar exactamente en el centro el texto del overlay */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Estilos para el div que contiene la información detallada del cómic seleccionado */
+.comicData {
+    width: 75%;
+    height: 100%;
+    margin: 17% 5% 20% 5%;
+}
+
+    .comicData h3 {
+        text-align: left;
+        color: white;
+        font-size: 1.3vw;
+        text-align: center;
+        margin-bottom: 4%;
+    }
+
+    .divPortadaInfo {
+        margin: auto;
+        width: 70%;
+        height: 45%;
+        margin-bottom: 4%;
+        position: relative;
+    }
+
+    .divPortadaInfo img {
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .comicData p {
+        color: white;
+        font-size: 14px;
+        margin-bottom: 4%;
+    }
