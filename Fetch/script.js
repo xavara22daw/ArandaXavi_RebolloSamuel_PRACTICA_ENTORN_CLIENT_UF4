@@ -5,7 +5,7 @@
     * @version 1.0 31.01.23 (data començament)
 */
 
-// Creamos 1 variable las cual igualamos a 1 elemento del DOM
+// Creamos 1 variable la cual igualamos a 1 elemento del DOM
 let contenedorComics = document.getElementById("resultados");
 
 // Declaramos la función asíncrona que realizará las peticiones
@@ -26,7 +26,7 @@ async function cridaRemota(url = '') {
     return response.json(); // passa de JSON a objecte JS
 }
 
-// Cada vez que hay un evento change en el elemento del DOM 'entrada', llamamos a la función asíncrona cridaRemota
+// Cada vez que hay un evento change en el elemento del DOM con id 'entrada', llamamos a la función asíncrona cridaRemota
 document.getElementById("entrada").onchange = function () {
     // Declaramos la variable 'idUndefined' para controlar si la búsqueda da resultados o no
     let idUndefined = false;
@@ -64,7 +64,7 @@ document.getElementById("entrada").onchange = function () {
                 contenedorComics.innerHTML = `<h1 style="margin-top: 21%; color: white;">La búsqueda no ha obtenido resultados.</h1>`;
             } else {
                 // Si hemos obtenido resultados en la búsqueda del personaje, seguimos con el proceso
-                contenedorComics.innerHTML = `<img src="../public/Doctor-Strange.gif" style="margin-top: 12%; transform: scale(0.6);">`;
+                contenedorComics.innerHTML = `<img src="../assets/Doctor-Strange.gif" style="margin-top: 12%; transform: scale(0.6);">`;
                 // Hacemos otra llamada a la función "cridaRemota" para encontrar los cómics del personaje
                 cridaRemota(`https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939&limit=84`)
                     .then(response => {

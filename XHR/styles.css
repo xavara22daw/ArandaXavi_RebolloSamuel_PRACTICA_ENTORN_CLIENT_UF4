@@ -7,7 +7,7 @@
 
 /* Imagen de fondo de la página */
 body {
-    background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8)),url("../public/avengers.jpg");
+    background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8)),url("../assets/avengers.jpg");
     background-size: cover;
     position: relative;
 }

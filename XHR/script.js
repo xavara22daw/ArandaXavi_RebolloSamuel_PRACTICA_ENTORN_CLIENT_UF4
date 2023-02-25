@@ -66,7 +66,7 @@ function inici(){
                 contenedorComics.innerHTML = `<h1 style="margin-top: 21%; color: white;">La búsqueda no ha obtenido resultados.</h1>`;
             }else {
                 // Si hemos obtenido resultados en la búsqueda del personaje, seguimos con el proceso
-                contenedorComics.innerHTML = `<img src="../public/Doctor-Strange.gif" style="margin-top: 12%; transform: scale(0.6);">`;
+                contenedorComics.innerHTML = `<img src="../assets/Doctor-Strange.gif" style="margin-top: 12%; transform: scale(0.6);">`;
                 // Hacemos otra llamada a la función "cridaRemota" para encontrar los cómics del personaje que hemos buscado
                 cridaRemota(`https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?ts=1&apikey=3c043a9e457ce749d34745ac17502e1f&hash=197925ff06c90e7929be51c9028a1939&limit=84`, 'GET', function(response){
                     contenedorComics.innerHTML = "";
