@@ -33,7 +33,7 @@ function cridaRemota(url, metodo, callback) {
     let xhr = new XMLHttpRequest(); 
     xhr.open(metodo, url, true);
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.readyState == 4) {
             let dades = JSON.parse(xhr.responseText);
             callback(dades);
         }
